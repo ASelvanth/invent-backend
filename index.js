@@ -5,7 +5,6 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors =require("cors");
 
-
 const authRoute =  require("./routes/auth")
 const usersRoute = require("./routes/users");
 const productRoutes = require('./routes/product')
@@ -25,13 +24,18 @@ var router = express.Router();
 const app = express()
 dotenv.config()
 
+//connecting to DB
+db();
 
 //Body parser
 app.use(express.json());
 //Cookie-Parser
 app.use(cookieParser());
 //CORS
-app.use(cors())
+app.use(cors());
+
+//Router
+app.use('/',router)
 
 // routes
 app.use("/api/users", usersRoute);
@@ -73,22 +77,8 @@ app.post('/payment', (req, res) => {
 
 //port
 const PORT=process.env.PORT || 5000;
-//Router
-app.use('/',router)
 
-const connect = async () => {
-    try {
-      await mongoose.connect(process.env.MONGO);
-      console.log("Connected to mongoDB.");
-    } catch (error) {
-      throw error;
-    }
-  };
-  mongoose.connection.on("disconnected", () => {
-    console.log("mongoDB disconnected!");
-  });
 
-  app.listen(PORT, ()=>{
-    connect();
-    console.log(`Server is running on ${PORT}`)
+app.listen(PORT, ()=>{
+  console.log(`Server is running on ${PORT}`)
 })
