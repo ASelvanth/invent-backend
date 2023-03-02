@@ -10,7 +10,7 @@ const usersRoute = require("./routes/users");
 const productRoutes = require('./routes/product')
 const checkoutApi = require('./routes/checkout-api')
 
-const cookieParser = require('cookie-Parser');
+const cookieParser = require('cookie-parser');
 
 const Stripe = require('stripe');
 const stripe = new Stripe('sk_test_51LL7u6SFApoQBYjoeQWWIgLmLJ8bGVJE9nrpqfc4VwwceSsolBKUdEweko72Zav1kch2QKtqcQVgOBzzq8SgG33S0062qVCJbV');
